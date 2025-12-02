@@ -265,11 +265,11 @@ public class Them_dg extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     private void warn(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Warning", JOptionPane.WARNING_MESSAGE);
     }
-    
+
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnHuyActionPerformed
@@ -311,6 +311,7 @@ public class Them_dg extends javax.swing.JFrame {
             return;
         } else if (!email.matches(".+@.+\\..+")) {
             warn("Email khong hop le!");
+            return;
         }
         if (gioiTinh.trim().isEmpty()) {
             warn("Khong duoc de trong gioi tinh!");
@@ -351,23 +352,26 @@ public class Them_dg extends javax.swing.JFrame {
         try {
             String mess = dg_DAO.themDG(dg);
             JOptionPane.showMessageDialog(this, mess);
+            if (mess.equalsIgnoreCase("Them doc gia thanh cong!")) {
+                txtMSDG.setText("");
+                txtTenDG.setText("");
+                txtDiaChi.setText("");
+                CbBoxNgaySinh.setSelectedIndex(0);
+                CbBoxThangSinh.setSelectedIndex(0);
+                txtNamSinh.setText("Nam");
+                txtEmail.setText("");
+                buttonGroup1.clearSelection();
+                CbBoxNgayDangki.setSelectedIndex(0);
+                CbBoxThangDangki.setSelectedIndex(0);
+                txtNamDangki.setText("Nam");
+                txtNgheNghiep.setText("");
+            }
 
         } catch (Exception ex) {
             Logger.getLogger(Doc_gia.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        txtMSDG.setText("");
-        txtTenDG.setText("");
-        txtDiaChi.setText("");
-        CbBoxNgaySinh.setSelectedIndex(0);
-        CbBoxThangSinh.setSelectedIndex(0);
-        txtNamSinh.setText("Nam");
-        txtEmail.setText("");
-        buttonGroup1.clearSelection();
-        CbBoxNgayDangki.setSelectedIndex(0);
-        CbBoxThangDangki.setSelectedIndex(0);
-        txtNamDangki.setText("Nam");
-        txtNgheNghiep.setText("");
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     /**

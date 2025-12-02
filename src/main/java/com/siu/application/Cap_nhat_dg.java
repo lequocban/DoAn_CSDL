@@ -390,7 +390,7 @@ public class Cap_nhat_dg extends javax.swing.JFrame {
         }
 
         try {
-            initTable();
+//            initTable();
         } catch (Exception ex) {
             Logger.getLogger(Doc_gia.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -461,7 +461,7 @@ public class Cap_nhat_dg extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenDG;
     // End of variables declaration//GEN-END:variables
 
-    private void initTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    private void initTable() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }

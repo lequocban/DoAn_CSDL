@@ -116,10 +116,10 @@ public class DOCGIA_DAO {
                 int rowAffected = pstmt.executeUpdate();
                 if (rowAffected > 0) {
                     con.commit();
-                    return "Them nhan vien thanh cong!";
+                    return "Them doc gia thanh cong!";
                 } else {
                     con.rollback();
-                    return "Them nhan vien that bai!";
+                    return "Them doc gia that bai!";
                 }
             }
         } catch (Exception e) {

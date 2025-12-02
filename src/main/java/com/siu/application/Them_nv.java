@@ -24,7 +24,7 @@ public class Them_nv extends javax.swing.JFrame {
     public Them_nv() {
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,7 +279,7 @@ public class Them_nv extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     private void warn(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Warning", JOptionPane.WARNING_MESSAGE);
     }
@@ -313,7 +313,7 @@ public class Them_nv extends javax.swing.JFrame {
 
         if (msnv.trim().isEmpty()) {
             warn("Khong duoc de trong MSNV!");
-            return ;
+            return;
         }
         if (hoTen.trim().isEmpty()) {
             warn("Khong duoc de trong ho ten!");
@@ -336,8 +336,9 @@ public class Them_nv extends javax.swing.JFrame {
             return;
         } else if (!email.matches(".+@.+\\..+")) {
             warn("Email khong hop le!");
+            return;
         }
-        if (chucVu.trim().isEmpty()) {
+        if (chucVu.trim().isEmpty() || chucVu.trim().equalsIgnoreCase("Chuc vu")) {
             warn("Khong duoc de trong chuc vu");
             return;
         }
@@ -376,24 +377,26 @@ public class Them_nv extends javax.swing.JFrame {
         try {
             String mess = nv_DAO.themNV(nv);
             JOptionPane.showMessageDialog(this, mess);
+            if (mess.equalsIgnoreCase("Them nhan vien thanh cong!")) {
+                txtManv.setText("");
+                txtTen.setText("");
+                txtDiaChi.setText("");
+                CbBoxNgaySinh.setSelectedIndex(0);
+                CbBoxThangSinh.setSelectedIndex(0);
+                txtNamSinh.setText("Nam");
+                buttonGroup1.clearSelection();
+                txtSDT.setText("");
+                txtEmail.setText("");
+                CbBoxNgayLam.setSelectedIndex(0);
+                CbBoxThangLam.setSelectedIndex(0);
+                txtNamLam.setText("Nam");
+                CbBoxChucVu.setSelectedIndex(0);
+            }
 
         } catch (Exception ex) {
             Logger.getLogger(Nhan_vien.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        txtManv.setText("");
-        txtTen.setText("");
-        txtDiaChi.setText("");
-        CbBoxNgaySinh.setSelectedIndex(0);
-        CbBoxThangSinh.setSelectedIndex(0);
-        txtNamSinh.setText("Nam");
-        buttonGroup1.clearSelection();
-        txtSDT.setText("");
-        txtEmail.setText("");
-        CbBoxNgayLam.setSelectedIndex(0);
-        CbBoxThangLam.setSelectedIndex(0);
-        txtNamLam.setText("Nam");
-        CbBoxChucVu.setSelectedIndex(0);
 //        try {
 //            initTable();
 //        } catch (Exception ex) {
