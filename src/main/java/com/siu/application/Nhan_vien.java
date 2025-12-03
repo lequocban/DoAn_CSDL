@@ -296,11 +296,15 @@ public class Nhan_vien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        Menu menu = new Menu(msnvDN);
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(this);
-        this.dispose();
+        try {
+            // TODO add your handling code here:
+            Menu menu = new Menu(msnvDN);
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(this);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(Nhan_vien.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed

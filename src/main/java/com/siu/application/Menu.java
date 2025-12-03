@@ -4,6 +4,9 @@
  */
 package com.siu.application;
 
+import com.siu.DAO.NHANVIEN_DAO;
+import com.siu.model.NHANVIEN;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,14 +21,16 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     private String msnvDN;
+    private String chucVuDN;
     public Menu() {
         initComponents();
         
     }
-    public Menu(String msnvDN) {
+    public Menu(String msnvDN) throws Exception {
         initComponents();
         this.msnvDN = msnvDN;
         lblmsnv.setText("MSNV: "+ msnvDN);
+        kiemTraQuyen();
         // ví dụ: hiển thị mã NV lên label nếu cần
         // lblUser.setText(msnvDN);
     }
@@ -33,6 +38,21 @@ public class Menu extends javax.swing.JFrame {
     // nếu cần getter
     public String getMsnvDN() {
         return msnvDN;
+    }
+    private void kiemTraQuyen() throws Exception {
+        NHANVIEN_DAO nv_DAO = new NHANVIEN_DAO();
+        ArrayList<NHANVIEN> lstNV = new ArrayList<>();
+        lstNV = nv_DAO.getDSNV();
+        
+        for (NHANVIEN nv : lstNV) {
+            if (nv.getMSNV().equalsIgnoreCase(msnvDN)) {
+                chucVuDN = nv.getChucVu();
+            }
+        }
+        lblChucVu.setText("Chức vụ: "+ chucVuDN);
+    }
+    private void warn(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Warning", JOptionPane.WARNING_MESSAGE);
     }
 
     /**
@@ -58,6 +78,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnLogOut = new javax.swing.JButton();
+        lblChucVu = new javax.swing.JLabel();
         lblmsnv = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -208,6 +229,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        lblChucVu.setBackground(new java.awt.Color(255, 255, 255));
+        lblChucVu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblChucVu.setForeground(new java.awt.Color(51, 153, 255));
+        lblChucVu.setText("Chức vụ: ");
+        lblChucVu.setOpaque(true);
+
         lblmsnv.setBackground(new java.awt.Color(255, 255, 255));
         lblmsnv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblmsnv.setForeground(new java.awt.Color(51, 153, 255));
@@ -219,20 +246,33 @@ public class Menu extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblmsnv, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(lblmsnv, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(280, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblmsnv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
-                .addGap(65, 65, 65))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(lblmsnv, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(95, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,6 +330,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDocGiaActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+        if (!chucVuDN.equalsIgnoreCase("Quan ly")) {
+            warn("Chi quan ly moi duoc truy cap!");
+            return;
+        }
         Nhan_vien nv = null;
         try {
             nv = new Nhan_vien(msnvDN);
@@ -365,6 +409,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblmsnv;
     // End of variables declaration//GEN-END:variables
 }

@@ -339,7 +339,12 @@ public class Doc_gia extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        Menu menu = new Menu(msnvDN);
+        Menu menu = null;
+        try {
+            menu = new Menu(msnvDN);
+        } catch (Exception ex) {
+            Logger.getLogger(Doc_gia.class.getName()).log(Level.SEVERE, null, ex);
+        }
         menu.setVisible(true);
         menu.setLocationRelativeTo(this);
         this.dispose();

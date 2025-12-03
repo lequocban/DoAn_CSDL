@@ -836,11 +836,15 @@ public class Sach extends javax.swing.JFrame {
     }//GEN-LAST:event_dialogMuonWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:Menu menu = new Menu(msnvDN);
-        Menu menu = new Menu(msnvDN);
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(this);
-        this.dispose();
+        try {
+            // TODO add your handling code here:Menu menu = new Menu(msnvDN);
+            Menu menu = new Menu(msnvDN);
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(this);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(Sach.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     /**
